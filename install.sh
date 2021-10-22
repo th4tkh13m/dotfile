@@ -1,6 +1,7 @@
 
 # INSTALL NEEDED PACKAGES
 sudo pacman -Rsu $(comm -23 <(pacman -Qq | sort) <(sort ./software/pkglist.txt))
+sudo pacman -Syu
 
 mkdir ~/dotfile_downloads
 
@@ -26,5 +27,14 @@ tar -zxvf ~/dotfile_downloads/dmenu-5.0.tar.gz -C ~/dotfile_downloads
 cp ./software/dmenu-5.0/config.h  ~/dotfile_downloads/dmenu-5.0/
 make clean -C ~/dotfile_downloads/dmenu-5.0
 sudo make install -C ~/dotfile_downloads/dmenu-5.0
+
+# INSTALL slock
+curl --output ~/dotfile_downloads/slock-1.4.tar.gz http://dl.suckless.org/tools/slock-1.4.tar.gz
+tar -zxvf ~/dotfile_downloads/slock-1.4.tar.gz -C ~/dotfile_downloads
+cp ./software/slock-1.4/config.h  ~/dotfile_downloads/slock-1.4/
+make clean -C ~/dotfile_downloads/slock-1.4
+sudo make install -C ~/dotfile_downloads/slock-1.4
+
+
 
 
