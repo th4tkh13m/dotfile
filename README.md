@@ -1,7 +1,10 @@
 # THIS IS THE CONFIG FILE OF MY MACHINE
 
 ## Philosophy
-I love suckless'Philosophy, which means I use simple, minimalist and suckless softwares.
+I love suckless' Philosophy, which means I use simple, minimalist and suckless softwares.
+
+## Measurements
+The measurements takes at my laptop, with TLP on. I do use TLP to reduce the performance of my laptop for better battery life. My TLP config file can also be found in this repository.
 
 ## WHAT DOES THIS DOTFILE CONTAIN
 This dotfile contains
