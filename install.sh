@@ -57,6 +57,16 @@ curl --output ~/dotfile_downloads/jdk17.tar.gz https://download.oracle.com/java/
 tar -zxvf ~/dotfile_downloads/jdk17.tar.gz -C ~/dotfile_downloads/
 mkdir ~/Java
 mv ~/dotfile_downloads/jdk-17.0.1 /Java/
-echo 
+echo 'export JAVA_HOME=$HOME/Java/jdk-17.0.1' >>~/.bashrc
+echo 'export PATH=$PATH:$JAVA_HOME/bin' >>~/.bashrc
 
+## INSTALL Miniconda
+curl --output ~/dotfile_downloads/Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sh ~/dotfile_downloads/Miniconda.sh
+
+
+## EDIT PS1
+echo "PS1='> '" >>~/.bashrc
+
+curl --output https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
 

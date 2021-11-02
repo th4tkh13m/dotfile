@@ -60,14 +60,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-/* static char volume[4] = "0"; */
 static const char *volumeup[] = { "amixer", "set", "Master", "2%+", "unmute", NULL}; 
 static const char *volumedown[] = { "amixer", "set", "Master", "2%-", "unmute", NULL}; 
 static const char *volumemute[] = { "amixer", "sset", "Master", "toggle", NULL}; 
 static const char *micmute[] = { "amixer", "set", "Capture", "toggle", NULL}; 
-/* static char brightness[2] = "0"; */
 static const char *brightnessup[] = {"xbacklight", "-inc", "5", NULL};
 static const char *brightnessdown[] = {"xbacklight", "-dec", "5", NULL};
+static const char *browser[] = {"qutebrowser", NULL};
 /* static const char *capture[] = {"maim", "-s", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL}; */
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -80,6 +79,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -113,6 +115,7 @@ static Key keys[] = {
 	{0,       XF86XK_AudioMicMute,        spawn,   {.v=micmute}},
 	{ShiftMask,	XK_Print,	spawn,	SHCMD("maim -s | xclip -selection clipboard -t image/png")},
 	{0,	XK_Print,	spawn,	SHCMD("maim | xclip -selection clipboard -t image/png")},
+	{ MODKEY,		XK_q,	spawn,	{.v = browser}},
 };
 
 /* button definitions */
