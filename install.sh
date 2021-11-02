@@ -1,7 +1,7 @@
 
 # INSTALL NEEDED PACKAGES
-sudo pacman -Rsu $(comm -23 <(pacman -Qq | sort) <(sort ./software/pkglist.txt))
-sudo pacman -Syu
+# sudo pacman -Rsu $(comm -23 <(pacman -Qq | sort) <(sort ./software/pkglist.txt))
+# sudo pacman -Syu
 
 mkdir ~/dotfile_downloads
 
@@ -9,6 +9,7 @@ mkdir ~/dotfile_downloads
 curl --output ~/dotfile_downloads/dwm-6.2.tar.gz http://dl.suckless.org/dwm/dwm-6.2.tar.gz
 tar -zxvf ~/dotfile_downloads/dwm-6.2.tar.gz -C ~/dotfile_downloads
 cp ./software/dwm-6.2/dwm-fullscreen-6.2.diff ./software/dwm-6.2/config.h  ~/dotfile_downloads/dwm-6.2/
+# cd ~/dotfile_downloads/
 patch --merge -i ~/dotfile_downloads/dwm-6.2/dwm-fullscreen-6.2.diff
 make clean -C ~/dotfile_downloads/dwm-6.2
 sudo make install -C ~/dotfile_downloads/dwm-6.2
@@ -35,6 +36,8 @@ cp ./software/slock-1.4/config.h  ~/dotfile_downloads/slock-1.4/
 make clean -C ~/dotfile_downloads/slock-1.4
 sudo make install -C ~/dotfile_downloads/slock-1.4
 
+# INSTALL rover file manager
+git clone --depth 1 https://github.com/lecram/rover.git ~/dotfile_downloads/rover/
 
 
 
