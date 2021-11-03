@@ -90,8 +90,3 @@ sudo install -m 755 ~/dotfile_downloads/bw /usr/local/bin/bw
 ## INSTALL NEOVIM
 cp -r .config/nvim ~/.config/
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
-
-
-
-
-
