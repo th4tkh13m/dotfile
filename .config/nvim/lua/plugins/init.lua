@@ -54,9 +54,13 @@ return packer.startup(function()
     end,
     after = 'nord.nvim'
     }
-   use {
+  use("nathom/filetype.nvim")
+  
+
+  use {
       "nvim-lua/plenary.nvim",
    }
+
 
    use {
       "wbthomason/packer.nvim",
@@ -73,11 +77,52 @@ return packer.startup(function()
 --          require("core.mappings").bufferline()
 --       end,
 --    }
+
+
    use {
       "lukas-reineke/indent-blankline.nvim",
       disable = not status.blankline,
       event = "BufRead",
       config = override_req("indent_blankline", "(plugins.configs.others).blankline()"),
+   }
+
+
+  use {
+       "Pocco81/AutoSave.nvim",
+       event = "InsertEnter",
+       config = function()
+         require("plugins.configs.autosave")
+       end,
+    }
+
+
+   use {
+      "karb94/neoscroll.nvim",
+       opt = true,
+       config = function()
+          require("neoscroll").setup()
+       end,
+
+       -- lazy loading
+       setup = function()
+         require("core.utils").packer_lazy_load "neoscroll.nvim"
+       end,
+  }
+
+
+   use {
+      "Pocco81/TrueZen.nvim",
+      cmd = {
+         "TZAtaraxis",
+         "TZMinimalist",
+         "TZFocus",
+      },
+      config = function()
+        require('plugins.configs.true_zen')
+      end,
+      setup = function()
+         require("core.mappings").true_zen()
+      end,
    }
 
 

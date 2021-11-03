@@ -116,6 +116,14 @@ M.mappings.plugins = {
    comment = {
       toggle = "gcc" -- toggle comment (works on multiple lines)
    },
+
+  true_zen = {
+    minimalist = "<F1>",
+    focus = "<F2>",
+    ataraxis = "<F3>"
+
+  },
+
    -- map to <ESC> with no lag
    better_escape = { -- <ESC> will still work
       esc_insertmode = { "jk" }, -- multiple mappings allowed

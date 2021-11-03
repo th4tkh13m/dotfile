@@ -110,6 +110,15 @@ M.comment = function()
    map("v", m, ":CommentToggle <CR>")
 end
 
+M.true_zen = function ()
+  map("n", plugin_maps.true_zen.minimalist, ":TZMinimalist <CR>")
+  map("v", plugin_maps.true_zen.minimalist, ":TZMinimalist <CR>")
+  map("n", plugin_maps.true_zen.focus, ":TZFocus <CR>")
+  map("v", plugin_maps.true_zen.focus, ":TZFocus <CR>")
+  map("n", plugin_maps.true_zen.ataraxis, ":TZAtaraxis <CR>")
+  map("n", plugin_maps.true_zen.ataraxis, ":TZAtaraxis <CR>")
+end
+
 M.nvimtree = function()
    map("n", plugin_maps.nvimtree.toggle, ":NvimTreeToggle <CR>")
    map("n", plugin_maps.nvimtree.focus, ":NvimTreeFocus <CR>")

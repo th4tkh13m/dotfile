@@ -52,6 +52,7 @@ opt.whichwrap:append "<>[]hl"
 g.mapleader = options.mapleader
 
 -- disable some builtin vim plugins
+g.did_load_filetypes = 1
 local disabled_built_ins = {
    "2html_plugin",
    "getscript",
