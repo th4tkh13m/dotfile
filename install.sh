@@ -68,5 +68,30 @@ sh ~/dotfile_downloads/Miniconda.sh
 ## EDIT PS1
 echo "PS1='> '" >>~/.bashrc
 
-curl --output https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+## INSTALL MYENV (for conda)
+conda create -n myenv python=3.8 scipy numpy matplotlib pandas scikit-learn seaborn jupyter 
+conda activate myenv
+echo "conda activate myenv" >>~/.bashrc
+
+## SETUP FONTS
+curl --output JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+mkdir /usr/share/fonts
+mkdir /usr/share/fonts/JetBrainsMono
+unzip JetBrainsMono.zip -d /usr/share/fonts/JetBrainsMono
+fc-cache -f -v
+
+
+## INSTALL BITWARDEN
+curl --output ~/dotfile_downloads/bitwarden.zip https://github.com/bitwarden/cli/releases/download/v1.19.1/bw-linux-1.19.1.zip
+unzip ~/dotfile_downloads/bitwarden.zip -d ~/dotfile_downloads/
+sudo install -m 755 ~/dotfile_downloads/bw /usr/local/bin/bw
+
+
+## INSTALL NEOVIM
+cp -r .config/nvim ~/.config/
+nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+
+
+
+
 
