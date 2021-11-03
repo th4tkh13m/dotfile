@@ -39,9 +39,9 @@ return packer.startup(function()
   use {'shaunsingh/nord.nvim',
    config = function()
 	   vim.g.nord_contrast = true
-	   vim.g.nord_borders = false
-	   vim.g.nord_disable_background = false
-	   vim.g.nord_italic = false
+	   vim.g.nord_borders = true
+	   vim.g.nord_disable_background = true
+	   vim.g.nord_italic = true
 	   require("nord").set()
    end,
    after = "packer.nvim"
@@ -62,7 +62,17 @@ return packer.startup(function()
       "wbthomason/packer.nvim",
       event = "VimEnter",
    }
-
+-- use {
+--       "akinsho/bufferline.nvim",
+--       disable = not status.bufferline,
+--       after = "packer.nvim",
+--       config = function ()
+--         require("bufferline").setup{}
+--       end,
+--       setup = function()
+--          require("core.mappings").bufferline()
+--       end,
+--    }
    use {
       "lukas-reineke/indent-blankline.nvim",
       disable = not status.blankline,

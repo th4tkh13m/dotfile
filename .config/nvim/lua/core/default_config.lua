@@ -36,6 +36,7 @@ M.options = {
 M.plugins = {
    -- enable and disable plugins (false for disable)
    status = {
+      -- bufferline = true, -- list open buffers up the top, easy switching too
       blankline = true, -- show code scope with symbols
       comment = true, -- easily (un)comment code, language aware
       esc_insertmode = true, -- map to <ESC> with no lag
@@ -56,21 +57,6 @@ M.plugins = {
       },
       luasnip = {
          snippet_path = {},
-      },
-      statusline = { -- statusline related options
-         -- these are filetypes, not pattern matched
-         -- shown filetypes will overrule hidden filetypes
-         hidden = {
-            "help",
-            "dashboard",
-            "NvimTree",
-            "terminal",
-         },
-         -- show short statusline on small screens
-         shortline = true,
-         shown = {},
-         -- default, round , slant , block , arrow
-         style = "default",
       },
       esc_insertmode_timeout = 300,
    },
@@ -122,9 +108,13 @@ M.mappings = {
 
 -- all plugins related mappings
 M.mappings.plugins = {
+  -- bufferline = {
+  --     next_buffer = "<TAB>", -- next buffer
+  --     prev_buffer = "<S-Tab>", -- previous buffer
+  --  },
    -- easily (un)comment code, language aware
    comment = {
-      toggle = "<leader>/", -- toggle comment (works on multiple lines)
+      toggle = "gcc" -- toggle comment (works on multiple lines)
    },
    -- map to <ESC> with no lag
    better_escape = { -- <ESC> will still work
@@ -132,7 +122,7 @@ M.mappings.plugins = {
    },
    -- file explorer/tree
    nvimtree = {
-      toggle = "<C-n>",
+      toggle = "<leader>q",
       focus = "<leader>e",
    },
    -- multitool for finding & picking things
@@ -145,7 +135,6 @@ M.mappings.plugins = {
       help_tags = "<leader>fh",
       live_grep = "<leader>fw",
       oldfiles = "<leader>fo",
-      themes = "<leader>th", -- NvChad theme picker
    },
 }
 

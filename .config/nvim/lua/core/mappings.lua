@@ -88,8 +88,6 @@ M.misc = function()
       cmd "silent! command PackerSync lua require 'plugins' require('packer').sync()"
       cmd "silent! command PackerUpdate lua require 'plugins' require('packer').update()"
 
-      -- add ChadReload command and maping
-      -- cmd "silent! command! NvChadReload lua require('nvchad').reload_config()"
    end
 
    non_config_mappings()
@@ -99,6 +97,12 @@ M.misc = function()
 end
 
 -- below are all plugin related mappings
+-- M.bufferline = function()
+--    local m = plugin_maps.bufferline
+-- 
+--    map("n", m.next_buffer, ":BufferLineCycleNext <CR>")
+--    map("n", m.prev_buffer, ":BufferLineCyclePrev <CR>")
+-- end
 
 M.comment = function()
    local m = plugin_maps.comment.toggle
@@ -122,7 +126,6 @@ M.telescope = function()
    map("n", m.help_tags, ":Telescope help_tags <CR>")
    map("n", m.live_grep, ":Telescope live_grep <CR>")
    map("n", m.oldfiles, ":Telescope oldfiles <CR>")
-   map("n", m.themes, ":Telescope themes <CR>")
 end
 
 return M
