@@ -6,6 +6,9 @@ end
 ts_config.setup {
    ensure_installed = {
       "lua",
+      "python",
+      "java",
+      "bash",
    },
    highlight = {
       enable = true,

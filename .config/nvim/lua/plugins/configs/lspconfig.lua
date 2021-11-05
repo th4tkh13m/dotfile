@@ -25,21 +25,23 @@ local function on_attach(_, bufnr)
    buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
    buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
    buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-   buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+   buf_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
    buf_set_keymap("n", "gk", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
    buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
    buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
    buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
    buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
    buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-   buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+   -- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+   buf_set_keymap('n', '<space>ca', '<cmd>lua require("telescope.builtin").lsp_code_actions()<CR>', opts)
    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
    buf_set_keymap("n", "ge", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+   buf_set_keymap('n', '<leader>ge', '<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<CR>', opts)
    buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
    buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
    buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
    buf_set_keymap("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-   buf_set_keymap("v", "<space>ca", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
+   buf_set_keymap("v", "<space>ca", "<cmd>lua require('telescope.builtin').lsp_range_code_actions()<CR>", opts)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -144,7 +146,7 @@ function M.setup()
 
     end
 
-    local root_markers = {'gradlew', 'pom.xml', 'git'}
+    local root_markers = {'gradlew', 'pom.xml', '.vscode', '.project'}
     local root_dir = require('jdtls.setup').find_root(root_markers)
     local home = os.getenv('HOME')
 
@@ -205,6 +207,39 @@ capabilities.workspace.configuration = true
       extendedClientCapabilities = extendedClientCapabilities;
     }
 
+--   -- UI
+    local finders = require'telescope.finders'
+    local sorters = require'telescope.sorters'
+    local actions = require'telescope.actions'
+    local pickers = require'telescope.pickers'
+    local action_state = require'telescope.actions.state'
+    require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
+      local opts = {}
+      pickers.new(opts, {
+        prompt_title = prompt,
+        finder    = finders.new_table {
+          results = items,
+          entry_maker = function(entry)
+            return {
+              value = entry,
+              display = label_fn(entry),
+              ordinal = label_fn(entry),
+            }
+          end,
+        },
+        sorter = sorters.get_generic_fuzzy_sorter(),
+        attach_mappings = function(prompt_bufnr)
+          actions.select_default:replace(function()
+            local selection = action_state.get_selected_entry(prompt_bufnr)
+            actions.close(prompt_bufnr)
+
+            cb(selection.value)
+          end)
+
+          return true
+        end,
+      }):find()
+    end
     -- Server
     require('jdtls').start_or_attach(config)
 end

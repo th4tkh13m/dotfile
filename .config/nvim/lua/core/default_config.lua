@@ -20,9 +20,9 @@ M.options = {
    numberwidth = 2,
    relativenumber = false,
    expandtab = true,
-   shiftwidth = 2,
+   shiftwidth = 4,
    smartindent = true,
-   tabstop = 8, -- Number of spaces that a <Tab> in the file counts for
+   tabstop = 4, -- Number of spaces that a <Tab> in the file counts for
    timeoutlen = 400,
    -- interval for writing swap file to disk, also used by gitsigns
    updatetime = 250,
@@ -36,10 +36,10 @@ M.options = {
 M.plugins = {
    -- enable and disable plugins (false for disable)
    status = {
+      -- bufferline = true, -- list open buffers up the top, easy switching too
       blankline = true, -- show code scope with symbols
       comment = true, -- easily (un)comment code, language aware
       esc_insertmode = true, -- map to <ESC> with no lag
-      feline = true, -- statusline
       gitsigns = true, -- gitsigns in statusline
       lspsignature = true, -- lsp enhancements
       vim_matchup = true, -- % operator enhancements
@@ -56,21 +56,6 @@ M.plugins = {
       },
       luasnip = {
          snippet_path = {},
-      },
-      statusline = { -- statusline related options
-         -- these are filetypes, not pattern matched
-         -- shown filetypes will overrule hidden filetypes
-         hidden = {
-            "help",
-            "dashboard",
-            "NvimTree",
-            "terminal",
-         },
-         -- show short statusline on small screens
-         shortline = true,
-         shown = {},
-         -- default, round , slant , block , arrow
-         style = "default",
       },
       esc_insertmode_timeout = 300,
    },
@@ -104,6 +89,14 @@ M.mappings = {
       moveUp = "<C-k>",
       moveDown = "<C-j>",
    },
+
+   window_resize = {
+     resizeLeft = "<space>h",
+     resizeRight = "<space>l",
+     resizeUp = "<space>k",
+     resizeDown = "<space>j",
+   },
+
    -- terminal related mappings
    terminal = {
       -- multiple mappings can be given for esc_termmode and esc_hide_termmode
@@ -122,17 +115,36 @@ M.mappings = {
 
 -- all plugins related mappings
 M.mappings.plugins = {
+  -- bufferline = {
+  --     next_buffer = "<TAB>", -- next buffer
+  --     prev_buffer = "<S-Tab>", -- previous buffer
+  --  },
+
+  hop = {
+    word = "<space>w",
+    line = "<space>l",
+    pattern = "<space>/",
+  },
+
    -- easily (un)comment code, language aware
    comment = {
-      toggle = "<leader>/", -- toggle comment (works on multiple lines)
+      toggle = "gcc" -- toggle comment (works on multiple lines)
    },
+
+  true_zen = {
+    minimalist = "<F1>",
+    focus = "<F2>",
+    ataraxis = "<F3>"
+
+  },
+
    -- map to <ESC> with no lag
    better_escape = { -- <ESC> will still work
       esc_insertmode = { "jk" }, -- multiple mappings allowed
    },
    -- file explorer/tree
    nvimtree = {
-      toggle = "<C-n>",
+      toggle = "<leader>q",
       focus = "<leader>e",
    },
    -- multitool for finding & picking things
@@ -145,7 +157,6 @@ M.mappings.plugins = {
       help_tags = "<leader>fh",
       live_grep = "<leader>fw",
       oldfiles = "<leader>fo",
-      themes = "<leader>th", -- NvChad theme picker
    },
 }
 

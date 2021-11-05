@@ -1,5 +1,4 @@
 local core_modules = {
-   "core.custom",
    "core.options",
    "core.autocmds",
    "core.mappings",

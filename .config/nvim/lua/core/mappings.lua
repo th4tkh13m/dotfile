@@ -55,6 +55,15 @@ M.misc = function()
          map("n", wnav.moveUp, "<C-w>k")
          map("n", wnav.moveDown, "<C-w>j")
 
+
+         local wres = maps.window_resize
+
+         map("n", wres.resizeLeft, ":vertical resize -5 <CR>")
+         map("n", wres.resizeRight, ":vertical resize +5 <CR>")
+         map("n", wres.resizeUp, ":res -5 <CR>")
+         map("n", wres.resizeDown, ":res +5 <CR>")
+
+
    end
 
    local function required_mappings()
@@ -88,8 +97,6 @@ M.misc = function()
       cmd "silent! command PackerSync lua require 'plugins' require('packer').sync()"
       cmd "silent! command PackerUpdate lua require 'plugins' require('packer').update()"
 
-      -- add ChadReload command and maping
-      -- cmd "silent! command! NvChadReload lua require('nvchad').reload_config()"
    end
 
    non_config_mappings()
@@ -99,11 +106,33 @@ M.misc = function()
 end
 
 -- below are all plugin related mappings
+-- M.bufferline = function()
+--    local m = plugin_maps.bufferline
+--
+--    map("n", m.next_buffer, ":BufferLineCycleNext <CR>")
+--    map("n", m.prev_buffer, ":BufferLineCyclePrev <CR>")
+-- end
+
+M.hop = function ()
+  map("n", plugin_maps.hop.word, ":HopWord <CR>")
+  map("n", plugin_maps.hop.line, ":HopLine <CR>")
+  map("n", plugin_maps.hop.pattern, ":HopPattern <CR>")
+end
+
 
 M.comment = function()
    local m = plugin_maps.comment.toggle
    map("n", m, ":CommentToggle <CR>")
    map("v", m, ":CommentToggle <CR>")
+end
+
+M.true_zen = function ()
+  map("n", plugin_maps.true_zen.minimalist, ":TZMinimalist <CR>")
+  map("v", plugin_maps.true_zen.minimalist, ":TZMinimalist <CR>")
+  map("n", plugin_maps.true_zen.focus, ":TZFocus <CR>")
+  map("v", plugin_maps.true_zen.focus, ":TZFocus <CR>")
+  map("n", plugin_maps.true_zen.ataraxis, ":TZAtaraxis <CR>")
+  map("n", plugin_maps.true_zen.ataraxis, ":TZAtaraxis <CR>")
 end
 
 M.nvimtree = function()
@@ -122,7 +151,6 @@ M.telescope = function()
    map("n", m.help_tags, ":Telescope help_tags <CR>")
    map("n", m.live_grep, ":Telescope live_grep <CR>")
    map("n", m.oldfiles, ":Telescope oldfiles <CR>")
-   map("n", m.themes, ":Telescope themes <CR>")
 end
 
 return M

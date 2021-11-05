@@ -34,40 +34,127 @@ return packer.startup(function()
 
    -- this is arranged on the basis of when a plugin starts
 
-   -- this is the nvchad core repo containing utilities for some features like theme swticher, no need to lazy load
-
-  use {'shaunsingh/nord.nvim',
+  use {'th4tkh13m/onenord.nvim',
    config = function()
-	   vim.g.nord_contrast = true
-	   vim.g.nord_borders = false
-	   vim.g.nord_disable_background = false
-	   vim.g.nord_italic = false
-	   require("nord").set()
+  	   vim.g.nord_disable_background = true
+  	   vim.g.nord_italic = true
+  	   require("onenord").set()
    end,
    after = "packer.nvim"
    }
+
     use {'hoob3rt/lualine.nvim',
     config = function()
       require 'lualine'.setup {
         options = {theme = 'nightfly'}
       }
     end,
-    after = 'nord.nvim'
+    after = 'onenord.nvim'
     }
-   use {
+  use("nathom/filetype.nvim")
+
+
+  use {
       "nvim-lua/plenary.nvim",
    }
+
 
    use {
       "wbthomason/packer.nvim",
       event = "VimEnter",
    }
+-- use {
+--       "akinsho/bufferline.nvim",
+--       disable = not status.bufferline,
+--       after = "packer.nvim",
+--       config = function ()
+--         require("bufferline").setup{}
+--       end,
+--       setup = function()
+--          require("core.mappings").bufferline()
+--       end,
+--    }
+
+
+  use {
+      "phaazon/hop.nvim",
+      cmd = {
+         "HopWord",
+         "HopLine",
+         "HopChar1",
+         "HopChar2",
+         "HopPattern",
+      },
+      as = "hop",
+      config = function()
+         require("hop").setup()
+      end,
+      setup = function ()
+         require("core.mappings").hop()
+      end
+   }
+
+  use {
+    "tpope/vim-fugitive",
+    cmd = "Git"
+  }
 
    use {
       "lukas-reineke/indent-blankline.nvim",
       disable = not status.blankline,
       event = "BufRead",
       config = override_req("indent_blankline", "(plugins.configs.others).blankline()"),
+   }
+
+
+  use {
+       "Pocco81/AutoSave.nvim",
+       event = "InsertEnter",
+       config = function()
+         require("plugins.configs.autosave")
+       end,
+    }
+
+
+   use {
+      "karb94/neoscroll.nvim",
+       opt = true,
+       config = function()
+          require("neoscroll").setup()
+       end,
+
+       -- lazy loading
+       setup = function()
+         require("core.utils").packer_lazy_load "neoscroll.nvim"
+       end,
+  }
+
+
+   use {
+      "Pocco81/TrueZen.nvim",
+      cmd = {
+         "TZAtaraxis",
+         "TZMinimalist",
+         "TZFocus",
+      },
+      config = function()
+        require('plugins.configs.true_zen')
+      end,
+      setup = function()
+         require("core.mappings").true_zen()
+      end,
+   }
+
+   use {
+     'lervag/vimtex',
+     ft = {'tex'},
+     config = function ()
+       vim.g.tex_flavor = 'latex'
+       vim.g.vimtex_view_method = 'zathura'
+       vim.g.vimtex_quickfix_mode = 0
+       vim.opt.conceallevel = 1
+       vim.g.tex_conceal = 'abdmg'
+     end
    }
 
 

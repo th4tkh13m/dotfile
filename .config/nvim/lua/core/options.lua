@@ -40,6 +40,7 @@ opt.undofile = options.undofile
 opt.lazyredraw = true
 opt.showtabline = 2
 opt.showmode = false
+opt.shadafile = "NONE"
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = options.updatetime
@@ -51,6 +52,7 @@ opt.whichwrap:append "<>[]hl"
 g.mapleader = options.mapleader
 
 -- disable some builtin vim plugins
+g.did_load_filetypes = 1
 local disabled_built_ins = {
    "2html_plugin",
    "getscript",
