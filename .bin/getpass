@@ -1,0 +1,3 @@
+#Get password from Bitwarden and pipe it to xclip
+bw get password $1 | xclip -selection clip
+

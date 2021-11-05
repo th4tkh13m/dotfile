@@ -1,0 +1,49 @@
+print_date ()
+{
+	date "+%a %d %b, %T"
+}
+
+print_battery ()
+{
+	echo "BAT:$(acpi --battery | cut -d, -f2)$(acpi --battery | cut -d, -f3)"
+}
+
+print_vol ()
+{
+	echo "VOL:$(awk '/%/ {gsub(/[\[\]]/,""); print $4 }' <(amixer sget Master))"
+}
+
+print_mute ()
+{
+	if [[ "$(awk '/%/ {gsub(/[\[\]]/,""); print $6}' <(amixer sget Master))" == "on" ]]
+	then
+		echo "Unmute"
+	else
+		echo "Mute"
+	fi
+}
+
+print_mic ()
+{
+	if [[ "$(awk 'NR>5 {gsub(/[\[\]]/,"");print $7}' <(amixer sget Capture))" == "on" ]]
+	then
+		echo "Mic Unmute"
+	else
+		echo "Mic Mute"
+	fi
+}
+
+print_bright ()
+{
+	echo "BRIGHT:$(xbacklight -get | cut -d'.' -f1)%"
+}
+
+print_mem ()
+{
+	echo "RAM:$(awk 'NR==2 {print $3}' <(free -m))"
+}
+
+while true; do
+	xsetroot -name "$(print_mem) | $(print_bright) | $(print_vol) ($(print_mute)) ($(print_mic)) | $(print_battery) | $(print_date)"
+	sleep 1
+done
