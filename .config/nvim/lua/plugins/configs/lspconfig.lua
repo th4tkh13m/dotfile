@@ -146,7 +146,7 @@ function M.setup()
 
     end
 
-    local root_markers = {'gradlew', 'pom.xml', 'git'}
+    local root_markers = {'gradlew', 'pom.xml', '.vscode', '.project'}
     local root_dir = require('jdtls.setup').find_root(root_markers)
     local home = os.getenv('HOME')
 
@@ -207,11 +207,12 @@ capabilities.workspace.configuration = true
       extendedClientCapabilities = extendedClientCapabilities;
     }
 
-  -- UI
+--   -- UI
     local finders = require'telescope.finders'
     local sorters = require'telescope.sorters'
     local actions = require'telescope.actions'
     local pickers = require'telescope.pickers'
+    local action_state = require'telescope.actions.state'
     require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
       local opts = {}
       pickers.new(opts, {
@@ -228,8 +229,8 @@ capabilities.workspace.configuration = true
         },
         sorter = sorters.get_generic_fuzzy_sorter(),
         attach_mappings = function(prompt_bufnr)
-          actions.goto_file_selection_edit:replace(function()
-            local selection = actions.get_selected_entry(prompt_bufnr)
+          actions.select_default:replace(function()
+            local selection = action_state.get_selected_entry(prompt_bufnr)
             actions.close(prompt_bufnr)
 
             cb(selection.value)

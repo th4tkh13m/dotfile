@@ -90,6 +90,14 @@ M.mappings = {
       moveUp = "<C-k>",
       moveDown = "<C-j>",
    },
+
+   window_resize = {
+     resizeLeft = "<space>h",
+     resizeRight = "<space>l",
+     resizeUp = "<space>k",
+     resizeDown = "<space>j",
+   },
+
    -- terminal related mappings
    terminal = {
       -- multiple mappings can be given for esc_termmode and esc_hide_termmode
@@ -112,6 +120,13 @@ M.mappings.plugins = {
   --     next_buffer = "<TAB>", -- next buffer
   --     prev_buffer = "<S-Tab>", -- previous buffer
   --  },
+
+  hop = {
+    word = "<space>w",
+    line = "<space>l",
+    pattern = "<space>/",
+  },
+
    -- easily (un)comment code, language aware
    comment = {
       toggle = "gcc" -- toggle comment (works on multiple lines)

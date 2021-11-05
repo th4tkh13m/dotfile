@@ -55,6 +55,15 @@ M.misc = function()
          map("n", wnav.moveUp, "<C-w>k")
          map("n", wnav.moveDown, "<C-w>j")
 
+
+         local wres = maps.window_resize
+
+         map("n", wres.resizeLeft, ":vertical resize -5 <CR>")
+         map("n", wres.resizeRight, ":vertical resize +5 <CR>")
+         map("n", wres.resizeUp, ":res -5 <CR>")
+         map("n", wres.resizeDown, ":res +5 <CR>")
+
+
    end
 
    local function required_mappings()
@@ -99,10 +108,17 @@ end
 -- below are all plugin related mappings
 -- M.bufferline = function()
 --    local m = plugin_maps.bufferline
--- 
+--
 --    map("n", m.next_buffer, ":BufferLineCycleNext <CR>")
 --    map("n", m.prev_buffer, ":BufferLineCyclePrev <CR>")
 -- end
+
+M.hop = function ()
+  map("n", plugin_maps.hop.word, ":HopWord <CR>")
+  map("n", plugin_maps.hop.line, ":HopLine <CR>")
+  map("n", plugin_maps.hop.pattern, ":HopPattern <CR>")
+end
+
 
 M.comment = function()
    local m = plugin_maps.comment.toggle

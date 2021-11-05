@@ -36,26 +36,44 @@ return packer.startup(function()
 
    -- this is the nvchad core repo containing utilities for some features like theme swticher, no need to lazy load
 
-  use {'shaunsingh/nord.nvim',
+  -- use {'shaunsingh/nord.nvim',
+  --  config = function()
+  -- 	   vim.g.nord_contrast = true
+  -- 	   vim.g.nord_borders = true
+  -- 	   vim.g.nord_disable_background = true
+  -- 	   vim.g.nord_italic = true
+  -- 	   require("nord").set()
+  --  end,
+  --  after = "packer.nvim"
+  --  }
+
+
+  use {'th4tkh13m/onenord.nvim',
    config = function()
-	   vim.g.nord_contrast = true
-	   vim.g.nord_borders = true
-	   vim.g.nord_disable_background = true
-	   vim.g.nord_italic = true
-	   require("nord").set()
+  	   vim.g.nord_disable_background = true
+  	   vim.g.nord_italic = true
+  	   require("onenord").set()
    end,
    after = "packer.nvim"
    }
+
+  -- use {'rmehri01/onenord.nvim',
+  --     config = function ()
+  --       require('onenord').setup()
+  --       vim.cmd [[colorscheme onenord]]
+  --     end,
+  --     after = "packer.nvim",
+  -- }
     use {'hoob3rt/lualine.nvim',
     config = function()
       require 'lualine'.setup {
         options = {theme = 'nightfly'}
       }
     end,
-    after = 'nord.nvim'
+    after = 'onenord.nvim'
     }
   use("nathom/filetype.nvim")
-  
+
 
   use {
       "nvim-lua/plenary.nvim",
@@ -78,6 +96,29 @@ return packer.startup(function()
 --       end,
 --    }
 
+
+  use {
+      "phaazon/hop.nvim",
+      cmd = {
+         "HopWord",
+         "HopLine",
+         "HopChar1",
+         "HopChar2",
+         "HopPattern",
+      },
+      as = "hop",
+      config = function()
+         require("hop").setup()
+      end,
+      setup = function ()
+         require("core.mappings").hop()
+      end
+   }
+
+  use {
+    "tpope/vim-fugitive",
+    cmd = "Git"
+  }
 
    use {
       "lukas-reineke/indent-blankline.nvim",
