@@ -1,4 +1,4 @@
 xrdb -load ~/.Xresources &
-./status &
+status &
 redshift &
 exec dwm
