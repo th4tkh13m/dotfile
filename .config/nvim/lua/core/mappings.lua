@@ -58,8 +58,8 @@ M.misc = function()
 
          local wres = maps.window_resize
 
-         map("n", wres.resizeLeft, ":vertical resize -5 <CR>")
-         map("n", wres.resizeRight, ":vertical resize +5 <CR>")
+         map("n", wres.resizeLeft, ":vertical resize +5 <CR>")
+         map("n", wres.resizeRight, ":vertical resize -5 <CR>")
          map("n", wres.resizeUp, ":res -5 <CR>")
          map("n", wres.resizeDown, ":res +5 <CR>")
 
@@ -73,6 +73,10 @@ M.misc = function()
       map("n", maps.new_tab, ":tabnew <CR>") -- new tabs
       map("n", maps.line_number_toggle, ":set nu! <CR>") -- toggle numbers
       map("n", maps.save_file, ":w <CR>") -- ctrl + s to save file
+
+      local tex_maps = maps.tex
+      map("n", tex_maps.compile, ":w !pdflatex %:r.tex && bibtex %:r.aux && pdflatex %:r.tex && pdflatex %:r.tex && rm %:r.aux %:r.log %:r.blg %:r.bbl <CR>")
+      map("n", tex_maps.view, ":!zathura %:r.pdf > /dev/null 2>&1 & <CR><CR>")
 
       -- terminal mappings --
       local term_maps = maps.terminal
@@ -112,6 +116,9 @@ end
 --    map("n", m.next_buffer, ":BufferLineCycleNext <CR>")
 --    map("n", m.prev_buffer, ":BufferLineCyclePrev <CR>")
 -- end
+M.angry_reviewer = function ()
+    map("n", plugin_maps.angry_reviewer.review, ":AngryReviewer <CR>")
+end
 
 M.hop = function ()
   map("n", plugin_maps.hop.word, ":HopWord <CR>")

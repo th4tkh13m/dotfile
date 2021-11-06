@@ -109,8 +109,14 @@ M.mappings = {
       -- below three are for spawning terminals
       new_horizontal = "<leader>h",
       new_vertical = "<leader>v",
-      new_window = "<leader>w",
+      new_window = "<leader>t",
    },
+
+   tex = {
+       compile = "<leader>cc",
+       view = "<leader>cv",
+   }
+
 }
 
 -- all plugins related mappings
@@ -120,15 +126,19 @@ M.mappings.plugins = {
   --     prev_buffer = "<S-Tab>", -- previous buffer
   --  },
 
+    angry_reviewer = {
+        review = "<leader>r",
+    },
+
   hop = {
-    word = "<space>w",
-    line = "<space>l",
-    pattern = "<space>/",
+    word = "<leader>w",
+    line = "<leader>l",
+    pattern = "<leader>/",
   },
 
    -- easily (un)comment code, language aware
    comment = {
-      toggle = "gcc" -- toggle comment (works on multiple lines)
+      toggle = "<space>/" -- toggle comment (works on multiple lines)
    },
 
   true_zen = {

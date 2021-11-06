@@ -42,6 +42,7 @@ packer.init {
    auto_clean = true,
    compile_on_sync = true,
    --    auto_reload_compiled = true
+   compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
 }
 
 return packer
